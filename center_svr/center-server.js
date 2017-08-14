@@ -18,6 +18,8 @@ function startServer() {
 
     server.on('connection', function (socket) {
 
+        logger.info("connection income,ip:%s", socket.remoteAddress);
+
         socket.setTimeout(60 * 1000, function () {
             logger.error("ip:%s,idle timeout, disconncting, bye", socket.remoteAddress);
             socket.end('idle timeout, disconnecting, bye!');

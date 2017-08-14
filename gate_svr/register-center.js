@@ -7,11 +7,9 @@ const constDefine = require('../lib/const-define');
 const shortID = require('./short-ID');
 const logger = require('./logger');
 
-
-
 let conn = null;
 
-function getNewConnection() {
+function registerSelf() {
 
     let port = sysConfig.centerSvrPort;
     let host = sysConfig.centerSvrHost;
@@ -22,7 +20,19 @@ function getNewConnection() {
         conn.psudoID = psudoID;
         conn.ip = host;
 
-        logger.info("connect to server,ip:%s,port:%d", host, port);
+        let jObj = packet.getPacket(cmdDefine.CENTER, cmdDefine.SUB_CENTER_UPDATE);
+
+        let serverInfo = {};
+        serverInfo.type = constDefine.SERVER_TYPE_GATE;
+        serverInfo.port = sysConfig.svrPort;
+
+        jObj.body = serverInfo;
+
+        let json = JSON.stringify(jObj);
+        console.log(json);
+        conn.write(json);
+
+        conn.destroy();
     });
 
     conn.on('end', function () {
@@ -41,34 +51,6 @@ function getNewConnection() {
     });
 
 }
-
-getNewConnection();
-
-function registerSelf() {
-
-    console.log("....");
-    if (conn.destroyed) {
-        getNewConnection();
-        return;
-    }
-    const port = sysConfig.centerPort;
-    const host = sysConfig.centerHost;
-
-    let jObj = packet.getPacket(cmdDefine.CENTER, cmdDefine.SUB_CENTER_UPDATE);
-
-    let serverInfo = {};
-    serverInfo.type = constDefine.SERVER_TYPE_GATE;
-    serverInfo.port = sysConfig.svrPort;
-
-    jObj.body = serverInfo;
-
-    let json = JSON.stringify(jObj);
-    console.log(json);
-    conn.write(json);
-
-    conn.destroy();
-}
-
 
 
 exports.registerSelf = registerSelf;

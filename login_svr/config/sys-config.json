@@ -2,6 +2,8 @@
 {
   "svrHost":"127.0.0.1",
   "svrPort":9100,
+  "centerSvrHost":"127.0.0.1",
+  "centerSvrPort":9200,
   "redisHost":"127.0.0.1",
   "redisPort":6379,
   "redisPassword":"",
