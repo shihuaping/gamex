@@ -4,5 +4,9 @@
   "svrPort":9100,
   "redisHost":"127.0.0.1",
   "redisPort":6379,
-  "redisPassword":""
+  "redisPassword":"",
+  "mysqlHost":"127.0.0.1",
+  "mysqlPort":3306,
+  "mysqlUsername":"root",
+  "mysqlPassword":"123456"
 }

@@ -133,7 +133,7 @@ setInterval(checkTimeout, 10*1000);
 exports.addClientConn   = addClientConn;
 exports.updateClientConn = updateClientConn;
 exports.addSvrConn      = addSvrConn;
-exports.updateSvrConn   = updateSvrConn();
+exports.updateSvrConn   = updateSvrConn;
 exports.getClientConn   = getClientConn;
 exports.getSvrConn      = getSvrConn;
 exports.addMapConn      = addMapConn;
