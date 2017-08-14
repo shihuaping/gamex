@@ -1,0 +1,23 @@
+{
+  "name": "gamex",
+  "version": "1.0.0",
+  "description": "gamex",
+  "main": "null.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gamex"
+  ],
+  "author": "shp",
+  "license": "ISC",
+  "dependencies": {
+    "log4js": "^2.3.3",
+    "mysql": "^2.14.1",
+    "net": "^1.0.2",
+    "process": "^0.11.10",
+    "redis": "^2.8.0",
+    "redis-pool-connection": "^1.4.0",
+    "ws": "^3.1.0"
+  }
+}

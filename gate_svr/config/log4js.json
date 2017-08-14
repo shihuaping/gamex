@@ -1,0 +1,25 @@
+{
+  "appenders": {
+    "gatefile": {
+      "type": "file",
+      "filename": "log/gate.log",
+      "maxLogSize": 10485760,
+      "numBackups": 3
+    },
+    "console": {
+      "type": "console",
+      "level": "debug"
+    }
+  },
+  "categories": {
+    "default": {
+      "appenders": [
+        "console",
+        "gatefile"
+      ],
+      "level": "debug"
+    }
+  }
+}
+
+
