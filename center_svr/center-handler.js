@@ -17,6 +17,7 @@ const packet = require('../protocol/packet');
 //      type
 //      ip
 //      port
+//      activeTime
 //      ext
 // }
 function registerServer(serverInfo) {
@@ -46,6 +47,8 @@ function process(socket, data) {
     switch (subCmd) {
         case cmdDefine.SUB_CENTER_UPDATE:
             let serverInfo = jObj.body;
+            serverInfo.ip = socket.remoteAddress;
+            serverInfo.activeTime = Math.floor(new Date().getTime()/1000);
             registerServer(serverInfo);
             break;
         case cmdDefine.SUB_CENTER_GET:

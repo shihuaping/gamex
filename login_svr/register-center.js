@@ -23,8 +23,9 @@ function registerSelf() {
         let jObj = packet.getPacket(cmdDefine.CENTER, cmdDefine.SUB_CENTER_UPDATE);
 
         let serverInfo = {};
-        serverInfo.type = constDefine.SERVER_TYPE_GATE;
+        serverInfo.type = constDefine.SERVER_TYPE_LOGIN;
         serverInfo.port = sysConfig.svrPort;
+        serverInfo.name = "login_svr";
 
         jObj.body = serverInfo;
 
