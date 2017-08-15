@@ -12,5 +12,3 @@ function getPacket(mainCmd,subCmd) {
 }
 
 exports.getPacket = getPacket;
-
-console.log(getPacket(0,0))

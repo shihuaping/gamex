@@ -6,6 +6,7 @@ use gamedb;
 create table if not exists user_base (
     uid         int         not null default 0  comment '用户ID',
     account     varchar(64) not null default '' comment '用户帐号',
+    type        int         not null default 0  comment '用户类型[渠道],1原始,2游客,3微信',
     name        varchar(64) not null default '' comment '用户名',
     nickName    varchar(64) not null default '' comment '昵称',
     password    char(32)    not null default '' comment '用户密码',
