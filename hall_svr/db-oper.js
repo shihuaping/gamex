@@ -13,14 +13,14 @@ function getPool() {
             port: sysConfig.mysqlPort,
             user: sysConfig.mysqlUsername,
             password: sysConfig.mysqlPassword,
-            database: 'userdb'
+            database: 'gamedb'
         }
     );
 }
 
 getPool();
 
-function login(userInfo) {
+function getGameList(userInfo) {
     return new Promise(function (resolve, reject) {
         try {
             //avoid sql injection

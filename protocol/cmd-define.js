@@ -5,7 +5,7 @@
 
 1001-1200 // login server
 1201-1300 // center server
-
+1301-1400 // hall server
 3000-10000 // game server
 
 
@@ -32,5 +32,9 @@ module.exports = {
 
     CENTER:1201,
     SUB_CENTER_UPDATE:1,
-    SUB_CENTER_GET:2
+    SUB_CENTER_GET:2,
+
+    HALL:1301,
+    SUB_HALL_GAME_LIST:1,
+
 };

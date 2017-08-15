@@ -1,7 +1,7 @@
 
-create database if not exists gamedb default charset utf8;
+create database if not exists userdb default charset utf8;
 
-use gamedb;
+use userdb;
 
 create table if not exists user_base (
     uid         int         not null default 0  comment '用户ID',
