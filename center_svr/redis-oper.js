@@ -37,6 +37,42 @@ function saveServer(serverInfo) {
         if (!jArray) {
             jArray = [];
         }
+
+        let serverIDList = [];
+        for (let v of jArray) {
+            serverIDList.push(v.serverNo);
+        }
+
+        serverIDList.sort(function (a,b) {
+            if(a<b) return -1;
+            else if(a===b) return 0;
+            else return 1;
+        });
+
+        let serverId = 1;
+        let prevID = 0;
+        let count = 0;
+        for(let v in serverIDList) {
+            prevID = v;
+            count++;
+            if(count === 1) {
+                serverId = prevID;
+                continue;
+            }
+            // get a usefull id
+            if(Math.abs(v-prevID) > 1) {
+                serverId = prevID + 1;
+                break;
+            }
+        }
+
+        // set server number
+        if(maxServerId > 1000) {
+            maxServerId = 1;
+        }
+        serverInfo.serverNo = maxServerId + 1;
+
+
         let found = false;
         for (let v of jArray) {
             if (v.ip === serverInfo.ip) {

@@ -25,7 +25,7 @@ function registerSelf() {
         let serverInfo = {};
         serverInfo.type = constDefine.SERVER_TYPE_GAME;
         serverInfo.port = sysConfig.svrPort;
-        serverInfo.name = "gate_svr";
+        serverInfo.name = "game_svr";
 
         jObj.body = serverInfo;
 

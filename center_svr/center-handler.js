@@ -18,6 +18,7 @@ const packet = require('../protocol/packet');
 //      ip
 //      port
 //      activeTime
+//      serverNo
 //      ext
 // }
 function registerServer(serverInfo) {

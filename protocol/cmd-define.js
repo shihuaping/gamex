@@ -9,17 +9,29 @@
 3000-10000 // game server
 
 
-{
-    "head":{
-    "mcmd":1,
-    "scmd:":1,
-    "remoteAddress":"127.0.0.1",
-    "seqNo":0
-},
-    "body": {
-    //as your wish
-}
-}
+//packet:{
+//    "head":{
+//          "mcmd":1,
+//          "scmd:":1,
+//          "remoteAddress":"127.0.0.1",
+//          "seqNo":0
+//     },
+//   "body": {
+//        //as your wish
+//    }
+//}
+
+center server
+//
+// serverInfo:{
+//      name
+//      type
+//      ip
+//      port
+//      activeTime
+//      serverNo
+//      ext
+// }
 */
 
 module.exports = {
@@ -49,5 +61,6 @@ module.exports = {
     SUB_GAME_DESK_WIN:9,            //胡牌
     SUB_GAME_REENTER_ROOM:10,       //断线重进房间
     SUB_GAME_QUERY_PLAYER_INFO:11,         //查询玩家游戏状态
-    SUB_GAME_DESK_WATCH:12          //观战
+    SUB_GAME_DESK_WATCH:12,          //观战
+    SUB_GAME_KICK_PLAYER:13           //房主踢人
 };
