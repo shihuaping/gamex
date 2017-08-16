@@ -20,12 +20,11 @@ function getPool() {
 
 getPool();
 
-function getGameList(userInfo) {
+function getGameList() {
     return new Promise(function (resolve, reject) {
         try {
             //avoid sql injection
-            let sql = 'select * from user_base where account=' + mysql.escape(userInfo.account) +
-                ' and password=' + mysql.escape(userInfo.password);
+            let sql = 'select * from game_list';
             console.log(sql);
 
             pool.getConnection(function (err, conn) {
@@ -48,5 +47,5 @@ function getGameList(userInfo) {
 
 }
 
-exports.login = login;
+exports.getGameList = getGameList;
 

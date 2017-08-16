@@ -37,4 +37,17 @@ module.exports = {
     HALL:1301,
     SUB_HALL_GAME_LIST:1,
 
+    GAME:1401,
+    SUB_GAME_CREATE_ROOM:1,         //创建房间
+    SUB_GAME_ENTER_ROOM:2,          //进入房间
+    SUB_GAME_LEAVE_ROOM:3,          //退出房间
+    SUB_GAME_DISMISS_ROOM:4,        //解散房间
+    SUB_GAME_DESK_SIT_DOWN:5,       //坐下
+    SUB_GAME_DESK_READY:6,          //准备
+    SUB_GAME_DESK_STAND_UP:7,       //起立
+    SUB_GAME_DESK_OPE_CARD:8,       //操作牌
+    SUB_GAME_DESK_WIN:9,            //胡牌
+    SUB_GAME_REENTER_ROOM:10,       //断线重进房间
+    SUB_GAME_QUERY_PLAYER_INFO:11,         //查询玩家游戏状态
+    SUB_GAME_DESK_WATCH:12          //观战
 };
