@@ -27,6 +27,7 @@ let CARD_CHAR = [
 
 // 出牌类型
 let CARD_TYPE = {
+    ILL: 0,
     DAN: 1,                 //单张
     DUI_ZI: 2,              //对子
     WANG_ZHA: 3,            //王炸
@@ -118,7 +119,7 @@ console.log(AllCards);
 function sortCards(cards) {
     cards.sort(function (a, b) {
         if(AllCards[a].grade > AllCards[b].grade) return -1;
-        else if(AllCards[a].grade == AllCards[b].grade) return 0;
+        else if(AllCards[a].grade === AllCards[b].grade) return 0;
         else  return 1;
     });
 }
@@ -246,7 +247,7 @@ function isSi(cards) {
     if (cards.length !== 4) {
         return false;
     }
-    for (var i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i++) {
         if (AllCards[cards[i]].grade !== AllCards[cards[i + 1]].grade) {
             return false;
         }
@@ -415,8 +416,7 @@ function isFeiJi(cards) {
             return true;
     }
 
-    return false
-
+    return false;
 }
 
 assert(isFeiJi([35, 9, 22, 21, 8, 34]));// 9 9 9 8 8 8
@@ -509,7 +509,7 @@ function getCardType(cards) {
     let c = cards.length;
     if (c === 1) {         //单张
         return CARD_TYPE.DAN;
-    }else if (c === 2) {     //两张只可能是王炸或一对
+    } else if (c === 2) {     //两张只可能是王炸或一对
         if (isDuiWang(cards)) {
             return CARD_TYPE.WANG_ZHA;
         } else if (isDuiZi(cards)) {
@@ -518,17 +518,17 @@ function getCardType(cards) {
     } else if (c === 3) {    //三张只可能是单出三张
         if (isSan(cards))
             return CARD_TYPE.SAN;
-    }else if (c === 4) {    //四张只可能是炸弹或三带一
+    } else if (c === 4) {    //四张只可能是炸弹或三带一
         if (isSi(cards))
             return CARD_TYPE.ZHA_DAN;
         else if (isS && aiYi(cards))
             return CARD_TYPE.SAN_DAI_YI;
-    }else if (c === 5) {    //5张只可能是顺子或三带一对
+    } else if (c === 5) {    //5张只可能是顺子或三带一对
         if (isShunZi(cards))
             return CARD_TYPE.SHUN_ZI;
         else if (isSanDaiDui(cards))
             return CARD_TYPE.SAN_DAI_YI_DUI;
-    }else if (c === 6) {    //6张可能是顺子、飞机（不带）、四带二、连对
+    } else if (c === 6) {    //6张可能是顺子、飞机（不带）、四带二、连对
         if (isShunZi(cards))
             return CARD_TYPE.SHUN_ZI;
         else if (isFeiJi(cards))
@@ -567,16 +567,16 @@ function getCardType(cards) {
         else if (isLi && ui(cards))
             return CARD_TYPE.LIAN_DUI;
     } else if (c ===13) {
-        //13张不合法，顺子带2，不可能是飞机，不可能是4带
+        //13张不合法，顺子带'2'，不可能是飞机，不可能是4带
     } else if (c === 14) {   //14张只可能是连对
         if (isLi && ui(cards))
             return CARD_TYPE.LIAN_DUI;
-    }else if (c === 15) {  //15张只可能是飞机（3头带对子）
+    } else if (c === 15) {  //15张只可能是飞机（3头带对子）
         if (isFeiJiDaiDui(cards))
             return CARD_TYPE.FEI_JI;
     }
 
-    return null;
+    return CARD_TYPE.ILL;
 }
 
 assert(getCardType([54]) === CARD_TYPE.DAN);
@@ -591,11 +591,11 @@ assert(getCardType([3, 4, 5, 6, 7, 8, 9]) === CARD_TYPE.SHUN_ZI);
 assert(getCardType([3, 3, 3, 4, 4, 4, 5, 5, 5]) === CARD_TYPE.FEI_JI);
 assert(getCardType([3, 3, 3, 1, 4, 4, 4, 2, 5, 5, 5, 7]) === CARD_TYPE.FEI_JI);
 assert(getCardType([3, 3, 3, 1, 1, 4, 4, 4, 2, 2, 5, 5, 5, 7, 7]) === CARD_TYPE.FEI_JI);
-assert(getCardType([3, 3, 4, 4, 2, 2]) === null);
-assert(getCardType([3, 3, 3, 4, 2]) === null);
-assert(getCardType([3, 3, 3, 4, 4, 4, 2]) === null);
-assert(getCardType([2, 3, 4, 5, 6]) === null);
-assert(getCardType([3, 4, 5, 6, 7, 7]) === null);
+assert(getCardType([3, 3, 4, 4, 2, 2]) === CARD_TYPE.ILL);
+assert(getCardType([3, 3, 3, 4, 2]) === CARD_TYPE.ILL);
+assert(getCardType([3, 3, 3, 4, 4, 4, 2]) === CARD_TYPE.ILL);
+assert(getCardType([2, 3, 4, 5, 6]) === CARD_TYPE.ILL);
+assert(getCardType([3, 4, 5, 6, 7, 7]) === CARD_TYPE.ILL);
 ////////////////////////////////////////////-
 
 
@@ -619,7 +619,7 @@ function getSortedCardsDetail(cards) {
 // 检查能不能出牌
 function checkCards(preCards, curCards) {
     let card_type = getCardType(curCards);
-    if (card_type === null)
+    if (card_type === CARD_TYPE.ILL)
         return false;
 
     //头次打
@@ -656,3 +656,13 @@ function checkCards(preCards, curCards) {
     return false;
 }
 
+function getAllCards() {
+    return AllCards;
+}
+
+exports.checkCards      = checkCards;
+exports.getCardDetail   = getCardDetail;
+exports.getSortedCardsDetail = getSortedCardsDetail;
+exports.getCardType     = getCardType;
+exports.getAllCards     = getAllCards;
+exports.dump            = dump;
