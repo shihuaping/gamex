@@ -117,7 +117,9 @@ console.log(AllCards);
 
 function sortCards(cards) {
     cards.sort(function (a, b) {
-        return AllCards[a].grade > AllCards[b].grade;
+        if(AllCards[a].grade > AllCards[b].grade) return -1;
+        else if(AllCards[a].grade == AllCards[b].grade) return 0;
+        else  return 1;
     });
 }
 
@@ -213,7 +215,7 @@ function isSanDaiDui(cards) {
     }
 
     sortCards(cards);
-    if (AllCards[cards[0]].grade !== AllCards[cards[1]].grade) {
+    if (AllCards[cards[0]].grade !== AllCards[cards[2]].grade) {
         let t = cards[3];
         cards[3] = cards[0];
         cards[0] = t;
@@ -225,13 +227,14 @@ function isSanDaiDui(cards) {
 
     if (AllCards[cards[0]].grade === AllCards[cards[1]].grade) {
         if (AllCards[cards[0]].grade === AllCards[cards[2]].grade
-            && AllCards[cards[0]].grade !== AllCards[cards[3]].grade
+            && AllCards[cards[2]].grade !== AllCards[cards[3]].grade
             && AllCards[cards[3]].grade === AllCards[cards[4]].grade) {
             return true;
         }
     } else {
         return false;
     }
+    return false;
 }
 
 assert(isSanDaiDui([30, 43, 17, 5, 31]));// 4 4 4 5 5
@@ -294,9 +297,9 @@ function isSiDaiLiangDui(cards) {
 
     let arr = [t1, t2, t3];
     arr.sort(function (a, b) {
-        if( a > b) { return 1;}
+        if( a > b) { return -1;}
         else if(a===b) {return 0;}
-        else {return -1;}
+        else {return 1;}
     });
 
     return (arr.length === 3) &&
@@ -307,7 +310,7 @@ assert(isSiDaiLiangDui([30, 43, 17, 4, 3, 16, 5, 18]));// 4 4 4 4 3 3 5 5
 assert(isSiDaiLiangDui([3, 16, 5, 18, 30, 43, 17, 4]));// 3 3 5 5 4 4 4 4
 assert(isSiDaiLiangDui([30, 43, 17, 4, 3, 6, 5, 18]) === false); // 4 4 4 4 3 6 5 5
 
-/*
+
 //顺子
 function isShunZi(cards) {
 
@@ -360,16 +363,16 @@ function isLianDui(cards)
 
         //再判定连续对
         if (i < cards.length / 2 - 1
-            && AllCards[cards[i * 2]].grade !== AllCards[cards[i * 2 + 1]].grade + 1)
+            && AllCards[cards[i * 2 + 1]].grade !== AllCards[cards[(i+1) * 2 ]].grade + 1)
             return false;
     }
 
     return true;
 }
 
-assert(isLi && ui([35, 9, 21, 8, 20, 7]));// 9 9 8 8 7 7
-assert(isLi && ui([35, 9, 21, 8, 20, 7, 6, 19]));// 9 9 8 8 7 7 6 6
-assert(isLi && ui([35, 9, 21, 8, 20, 7, 33]) === false);// 9 9 8 8 7 7 7
+assert(isLianDui([35, 9, 21, 8, 20, 7]));// 9 9 8 8 7 7
+assert(isLianDui([35, 9, 21, 8, 20, 7, 6, 19]));// 9 9 8 8 7 7 6 6
+assert(isLianDui([35, 9, 21, 8, 20, 7, 33]) === false);// 9 9 8 8 7 7 7
 
 //飞机(不带)
 function isFeiJi(cards) {
@@ -380,8 +383,8 @@ function isFeiJi(cards) {
     let grades = getGrades(cards);
 
     // 如果不是三张，就判错
-    for (let v of grades) {
-        if (v !== 3)
+    for (let i in grades) {
+        if (grades[i] !== 3)
             return false;
     }
 
@@ -391,9 +394,9 @@ function isFeiJi(cards) {
     let t3 = 0;
     for(k in grades) {
         if (grades[k] === 3) {
-            if (!t1) t1 = k;
-            else if(!t2) t2 = k;
-            else if(!t3) t3 = k;
+            if (!t1) t1 = Number(k);
+            else if(!t2) t2 = Number(k);
+            else if(!t3) t3 = Number(k);
         }
     }
 
@@ -403,9 +406,9 @@ function isFeiJi(cards) {
     if (cards.length === 9 && t1 && t2 && t3) {
         let arr = [t1, t2, t3];
         arr.sort(function (a, b) {
-            if (a > b) return 1;
+            if (a > b) return -1;
             else if (a === b) return 0;
-            else return -1;
+            else return 1;
         });
 
         if (arr[0] === arr[1] + 1 && arr[1] === arr[2] + 1)
@@ -432,9 +435,9 @@ function isFeiJiDaiDan(cards) {
     let t3 = 0;
     for(let k in grades) {
         if (grades[k] === 3) {
-            if (!t1) t1 = k;
-            else if(!t2) t2 = k;
-            else if(!t3) t3 = k;
+            if (!t1) t1 = Number(k);
+            else if(!t2) t2 = Number(k);
+            else if(!t3) t3 = Number(k);
         }
     }
 
@@ -445,7 +448,7 @@ function isFeiJiDaiDan(cards) {
     if (cards.length === 12 && t1 && t2 && t3) {
         let arr = [t1, t2, t3];
         arr.sort(function (a,b) {
-            if (a>b)return 1;
+            if (a>b)return -1;
             else if(a===b) return 0;
             else  return 1;
         });
@@ -473,10 +476,10 @@ function isFeiJiDaiDui(cards) {
     let t3 = 0;
     for(let k in grades) {
         if (grades[k] === 3) {
-            if (!t1) t1 = k;
-            else if(!t2) t2 = k;
-            else if(!t3) t3 = k;
-        } else if(grades[k] !== 2)
+            if (!t1) t1 = Number(k);
+            else if(!t2) t2 = Number(k);
+            else if(!t3) t3 = Number(k);
+        } else if(grades[k] !== 2) {
             return false;
         }
     }
@@ -487,19 +490,19 @@ function isFeiJiDaiDui(cards) {
     if (cards.length === 15 && t1 && t2 && t3) {
         let arr = [t1, t2, t3];
         arr.sort(function (a, b) {
-            if (a > b) return 1;
+            if (a > b) return -1;
             else if (a === b) return 0;
-            else return -1;
+            else return 1;
         });
-        if (arr[1] === arr[2] + 1 && arr[2] === arr[3] + 1)
+        if (arr[0] === arr[1] + 1 && arr[1] === arr[2] + 1)
             return true;
     }
 
     return false;
 }
 
-assert(isFeiJiDaiDui([35, 9, 22, 21, 8, 34, 3, 4, 16, 17]));// 9 9 9 8 8 8 3 3 4 4
 assert(isFeiJiDaiDui([35, 9, 22, 21, 8, 34, 7, 20, 33, 3, 16, 4, 17, 5, 18]));//9 9 9 8 8 8 7 7 7 3 3 4 4 5 5
+assert(isFeiJiDaiDui([35, 9, 22, 21, 8, 34, 3, 4, 16, 17]));// 9 9 9 8 8 8 3 3 4 4
 assert(isFeiJiDaiDui([35, 9, 22, 21, 8, 34, 3, 4, 16, 18]) === false); // 9 9 9 8 8 8 3 3 4 5
 
 function getCardType(cards) {
@@ -523,7 +526,7 @@ function getCardType(cards) {
     }else if (c === 5) {    //5张只可能是顺子或三带一对
         if (isShunZi(cards))
             return CARD_TYPE.SHUN_ZI;
-        else if (isS && aiDui(cards))
+        else if (isSanDaiDui(cards))
             return CARD_TYPE.SAN_DAI_YI_DUI;
     }else if (c === 6) {    //6张可能是顺子、飞机（不带）、四带二、连对
         if (isShunZi(cards))
@@ -532,7 +535,7 @@ function getCardType(cards) {
             return CARD_TYPE.FEI_JI;
         else if (isSiDaiEr(cards))
             return CARD_TYPE.SI_DAI_ER;
-        else if (isLi && ui(cards))
+        else if (isLianDui(cards))
             return CARD_TYPE.LIAN_DUI;
     } else if (c === 7 || c === 11) {  //7或11张只可能是顺子
         if (isShunZi(cards))
@@ -542,7 +545,7 @@ function getCardType(cards) {
             return CARD_TYPE.SHUN_ZI;
         else if (isFeiJiDaiDan(cards))
             return CARD_TYPE.FEI_JI;
-        else if (isLi && ui(cards))
+        else if (isLianDui(cards))
             return CARD_TYPE.LIAN_DUI;
     } else if (c === 9) {      //9张只可能是顺子、飞机（3头不带）
         if (isShunZi(cards))
@@ -653,5 +656,3 @@ function checkCards(preCards, curCards) {
     return false;
 }
 
-
-*/
