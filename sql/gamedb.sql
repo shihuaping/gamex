@@ -3,6 +3,8 @@ create database if not exists gamedb default charset utf8;
 
 use gamedb;
 
+-- 游戏表
+-- 游戏id手工维护
 create table if not exists game_list (
 
     gid     int         not null default '0'    comment '游戏ID',
@@ -11,6 +13,8 @@ create table if not exists game_list (
     index(gid)
 ) engine=innodb default charset 'utf8';
 
+-- 游戏服相关信息
+-- 注意游戏服ip和端口均为外网ip和端口
 create table if not exists game_server_list (
 
     gid         int         not null default '0'    comment '游戏ID',
@@ -25,6 +29,7 @@ create table if not exists game_server_list (
     index(gid,status)
 ) engine=innodb default charset 'utf8';
 
+-- 每个用户在每个游戏中都有一份单独的数据，保证分数和金币数不乱
 create table if not exists user_game_info (
 
     uid         int         not null default '0'    comment '用户id',

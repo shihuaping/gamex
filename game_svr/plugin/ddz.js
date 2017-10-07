@@ -37,7 +37,7 @@ class DouDiZhu {
             arrLength--;
         }
 
-         pos = 2;
+        pos = 2;
         this.seats[pos] = {};
         this.seats[pos].handCards = []; //手上的牌
         this.seats[pos].outCards = [];  //已经打出的牌
@@ -49,7 +49,7 @@ class DouDiZhu {
             arrLength--;
         }
 
-         pos = 3;
+        pos = 3;
         this.seats[pos] = {};
         this.seats[pos].handCards = []; //手上的牌
         this.seats[pos].outCards = [];  //已经打出的牌

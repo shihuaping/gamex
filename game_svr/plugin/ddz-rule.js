@@ -610,7 +610,7 @@ function getSortedCardsDetail(cards) {
     sortCards(cards);
     let cardDetails = [];
     for (let i in cards) {
-        cardDetails[i] = _M.getCardDetail(cards[i]);
+        cardDetails[i] = getCardDetail(cards[i]);
     }
     return cardDetails;
 }

@@ -8,7 +8,7 @@ var pool = null;
 function getPool() {
     pool = mysql.createPool(
         {
-            connectionLimit: 50,
+            connectionLimit: 50,  //TODO config in file
             host: sysConfig.mysqlHost,
             port: sysConfig.mysqlPort,
             user: sysConfig.mysqlUsername,
@@ -47,6 +47,8 @@ function login(userInfo) {
     });
 
 }
+
+
 
 exports.login = login;
 

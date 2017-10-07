@@ -8,6 +8,7 @@
 1301-1400 // hall server
 3000-10000 // game server
 
+10000-20000 //client <-> server
 
 //packet:{
 //    "head":{
@@ -62,5 +63,8 @@ module.exports = {
     SUB_GAME_REENTER_ROOM:10,       //断线重进房间
     SUB_GAME_QUERY_PLAYER_INFO:11,         //查询玩家游戏状态
     SUB_GAME_DESK_WATCH:12,          //观战
-    SUB_GAME_KICK_PLAYER:13           //房主踢人
+    SUB_GAME_KICK_PLAYER:1,           //房主踢人
+
+    EVENT_OUT_CARD:1,
+    EVENT_PASS_CARD:2,
 };

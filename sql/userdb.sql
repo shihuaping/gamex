@@ -3,6 +3,8 @@ create database if not exists userdb default charset utf8;
 
 use userdb;
 
+-- 用户表
+-- 用户只能单点登陆，单点登陆在redis中实现，不写数据库，这个表应该是读多写少的
 create table if not exists user_base (
     uid         int         not null default 0  comment '用户ID',
     account     varchar(64) not null default '' comment '用户帐号',

@@ -7,5 +7,5 @@
   "redisPassword":"",
   "centerSvrHost":"127.0.0.1",
   "centerSvrPort":9200,
-  "plugin":"ddz"
+  "plugin":"ddz.js"
 }

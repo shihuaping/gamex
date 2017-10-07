@@ -3,6 +3,8 @@
 
 //房间列表暂时不存数据库了
 
+const desk = require('./desk');
+
 function createRoom(socket, packet) {
 
 }
@@ -44,7 +46,7 @@ function playerWatch(socket, packet) {
 }
 
 function playerOpeCard(socket, packet) {
-
+    desk.playerOpeCard(socket, packet);
 }
 
 function playerWin(socket, packet) {

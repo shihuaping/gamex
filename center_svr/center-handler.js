@@ -11,7 +11,7 @@ const rdsOper = require('./redis-oper');
 const cmdDefine = require('../protocol/cmd-define');
 const packet = require('../protocol/packet');
 
-//
+//serverInfo
 // {
 //      name
 //      type
@@ -46,12 +46,14 @@ function process(socket, data) {
     let mainCmd = jObj.head.mcmd;
     let subCmd = jObj.head.scmd;
     switch (subCmd) {
+        //更新服务状态
         case cmdDefine.SUB_CENTER_UPDATE:
             let serverInfo = jObj.body;
             serverInfo.ip = socket.remoteAddress;
             serverInfo.activeTime = Math.floor(new Date().getTime()/1000);
             registerServer(serverInfo);
             break;
+        //查询服务可用列表
         case cmdDefine.SUB_CENTER_GET:
             let serverList = getServer(socket, serverInfo);
             let retObj = packet.getPacket(mainCmd,subCmd+100);

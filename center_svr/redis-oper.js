@@ -22,6 +22,7 @@ function getConnection() {
 
 getConnection();
 
+//保存服务信息
 function saveServer(serverInfo) {
 
     let keyName = rdsKey.KEY_SERVER_TYPE + serverInfo.type;
@@ -59,7 +60,7 @@ function saveServer(serverInfo) {
                 serverId = prevID;
                 continue;
             }
-            // get a usefull id
+            // get a usefull id, TODO cocurrency problem
             if(Math.abs(v-prevID) > 1) {
                 serverId = prevID + 1;
                 break;
@@ -91,10 +92,11 @@ function saveServer(serverInfo) {
     });
 }
 
+//查询可用服务列表
 function getServerList(type) {
 
     return new Promise(function (resolve, reject) {
-        let keyName = rdsKey.KEY_SERVER_TYPE + serverInfo.type;
+        let keyName = rdsKey.KEY_SERVER_TYPE + type;
         rds.get(keyName, function (err, reply) {
             if (err) {
                 reject(err);
@@ -105,6 +107,7 @@ function getServerList(type) {
     });
 }
 
+//移除掉线的服务
 async function removeServer(serverInfo) {
     let serverList = await getServerList(serverInfo.type);
     let jArray = JSON.parse(serverList);
