@@ -1,3 +1,9 @@
+
+//
+// 将服务信息保存在redis中，如果服务比较多，会造成冲突。每5秒一次心跳，极端情况下可能有服务永远注册不上。
+// 仅有几个服务甚至十几个服务可以忽略上面的问题。有几十个服务就不要使用这种方式了，应该用rpc。
+//
+
 const sysConfig = require('./config/sys-config.json');
 const redis = require('redis');
 const rdsKey = require('../lib/rds-key');
@@ -86,7 +92,7 @@ function saveServer(serverInfo) {
         if (!found) {
             jArray.push(serverInfo);
             let json = JSON.stringify(jArray);
-            rds.set(keyName, json);
+            rds.set(keyName, json, 60*1000);
         }
 
     });
@@ -121,7 +127,7 @@ async function removeServer(serverInfo) {
     }
     let keyName = rdsKey.KEY_SERVER_TYPE + serverInfo.type;
     let json = JSON.stringify(jArray);
-    rds.set(keyName, json);
+    rds.set(keyName, json, 60*1000);
 }
 
 exports.getServerList = getServerList;

@@ -48,7 +48,33 @@ function login(userInfo) {
 
 }
 
+function register(userInfo) {
 
+    return new Promise(function (resolve, reject) {
+        try {
+            let sql = 'insert into user_base(accuounts, password) values(' +
+                mysq.escape(userInfo.accounts) + ',' + mysq.escape(userInfo.password) + ')';
+
+            console.log(sql);
+
+            pool.getConnection(function (err, conn) {
+                conn.query(sql, function (err, results, fields) {
+                    conn.release();
+                    if(err) {
+                        throw  ex;
+                    }
+
+                    resolve(results);
+                })
+            })
+        } catch (ex) {
+            logger.error(ex);
+            reject(ex);
+        }
+    });
+
+}
 
 exports.login = login;
+exports.register = register;
 

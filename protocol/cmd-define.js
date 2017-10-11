@@ -39,16 +39,19 @@ module.exports = {
     HEART_BEAT:1,
 
     LOGIN:1001,
-    SUB_LOGIN_ACCOUNT:1,
-    SUB_LOGIN_PHONE:2,
-    SUB_LOGIN_VISITOR:3,
+    SUB_LOGIN_ACCOUNT:1,            //帐号登录
+    SUB_LOGIN_PHONE:2,              //手机登录
+    SUB_LOGIN_VISITOR:3,            //游客登录
 
     CENTER:1201,
-    SUB_CENTER_UPDATE:1,
-    SUB_CENTER_GET:2,
+    SUB_CENTER_UPDATE:1,            //向中央服务器上报状态
+    SUB_CENTER_GET:2,               //从中央服务器获取对应的服务列表
+    SUB_CENTER_PLAYER_OL,           //玩家登陆,玩家退出游戏也是这个状态
+    SUB_CENTER_PLAYER_PL,           //玩家游戏中
 
     HALL:1301,
-    SUB_HALL_GAME_LIST:1,
+    SUB_HALL_GAME_LIST:1,           //游戏列表
+    SUB_GAME_SERVER_LIST:2,         //游戏服务列表
 
     GAME:1401,
     SUB_GAME_CREATE_ROOM:1,         //创建房间
