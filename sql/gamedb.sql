@@ -24,6 +24,7 @@ create table if not exists game_server_list (
     lowScore    bigint      not null default '0'    comment '允许最低分,为0表示不限制',
     upScore     bigint      not null default '0'    comment '允许最高分,为0表示不限制',
     status      int         not null default '0'    comment '1为正常，2为维护中，3为停服',
+    maxRoom     int         not null default '100'  comment '最大房间数',
     createTime  timestamp   not null default  0     comment '创建时间',
     modifyTime  timestamp   not null default  0     comment '修改时间',
     index(gid,status)
