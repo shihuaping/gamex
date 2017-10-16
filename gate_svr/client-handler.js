@@ -1,4 +1,11 @@
 
+
+//
+//
+// 客户端请求进来时的处理
+//
+//
+
 const logger = require('./logger');
 const connections = require('./connections');
 const cmdDefine = require('../protocol/cmd-define');
